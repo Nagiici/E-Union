@@ -33,7 +33,12 @@ func handle_input(delta: float) -> void:
         direction = direction.normalized()
         velocity.x = direction.x * speed
     
-    # Handle jumping
-    if Input.is_action_just_pressed("ui_up") and is_grounded:
-        velocity.y = jump_velocity  # Set vertical velocity for jump
-        is_grounded = false  # Character is now in the air
+    # Handle jumping and double jump
+    if Input.is_action_just_pressed("ui_up"):
+        if is_grounded:
+            velocity.y = jump_velocity  # First jump when grounded
+            jump_count = 1  # Set jump count to 1
+            is_grounded = false  # Character is now in the air
+        elif jump_count == 1:
+            velocity.y = jump_velocity  # Second jump in the air
+            jump_count = 2  # Limit to only one extra jump in the air
