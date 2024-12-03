@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtm263xh5y64o"
+path="res://.godot/imported/刀打铁上面 (2).mp3-44f824cb3f393e0ab537384de53aa71d.mp3str"
+
+[deps]
+
+source_file="res://art/Audio/刀打铁上面 (2).mp3"
+dest_files=["res://.godot/imported/刀打铁上面 (2).mp3-44f824cb3f393e0ab537384de53aa71d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
