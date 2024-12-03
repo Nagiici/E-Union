@@ -1,0 +1,44 @@
+extends KinematicBody2D
+
+# Define variables for jump, gravity, and speed
+var jump_velocity: float = -400  
+var gravity: float = 900
+var speed: float = 200
+var velocity: Vector2 = Vector2.ZERO
+var is_grounded: bool = false
+var is_alive: bool = true
+
+# Called every frame (use _physics_process for physics-related updates)
+func _physics_process(delta: float) -> void:
+    if is_alive:
+        handle_input(delta)
+        apply_gravity(delta)
+        velocity = move_and_slide(velocity, Vector2.UP)  # Apply movement with collision checking
+
+        # Check if the character is on the floor after movement
+        is_grounded = is_on_floor()
+
+# Method to handle player input and movement
+func handle_input(delta: float) -> void:
+    var direction: Vector2 = Vector2.ZERO
+    
+    # Get input from arrow keys or WASD for horizontal movement
+    if Input.is_action_pressed("ui_right"):
+        direction.x += 1
+    if Input.is_action_pressed("ui_left"):
+        direction.x -= 1
+    
+    # Normalize direction and apply speed
+    if direction.length() > 0:
+        direction = direction.normalized()
+        velocity.x = direction.x * speed
+    
+    # Handle jumping and double jump
+    if Input.is_action_just_pressed("ui_up"):
+        if is_grounded:
+            velocity.y = jump_velocity  # First jump when grounded
+            jump_count = 1  # Set jump count to 1
+            is_grounded = false  # Character is now in the air
+        elif jump_count == 1:
+            velocity.y = jump_velocity  # Second jump in the air
+            jump_count = 2  # Limit to only one extra jump in the air
