@@ -14,12 +14,11 @@ var is_wall_sliding = false
 var dash_gravity = Vector2(0, 980)  #设定该变量为力
 var canattack = true
 
+func _ready() -> void:
+	$AnimationPlayer.play("idle")
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack") and canattack == true:
-		$AnimationPlayer.play('attack')#播放攻击动画
-		$attack_cool.start()
-		canattack = false
+	attack()
 	# Add the gravity.
 	is_grounded = is_on_floor() or is_on_left_wall() or is_on_right_wall()
 	if not is_on_floor():
@@ -40,28 +39,23 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY * 85/100
 			jump_count = 2
 			$AnimationPlayer.play("jump_2")
-	 
-	#动画方向调整
-	animation_adjust()
-	
-	#Get the input direction and handle the movement/deceleration.
-	 #As good practice, you should replace UI actions with custom gameplay actions.
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	walk_animation()
 		
-	
+	#if Input.is_action_pressed("left"):
+		#$Sprite2D.flip_h = false
+	#if Input.is_action_pressed("right"):
+		#$Sprite2D.flip_h = true
 	
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	if velocity == Vector2.ZERO: #待机动画
-		if Input.is_action_just_pressed("attack"):
-			await get_tree().create_timer(3).timeout
-			$AnimationPlayer.play('idle')
-		else:
-			$AnimationPlayer.play('idle')
+	
+			
 	
 	move_and_slide()
 	dash()
@@ -74,7 +68,10 @@ func _physics_process(delta: float) -> void:
 	# 检查蹬墙跳跃
 	if is_wall_sliding and Input.is_action_just_pressed("jump"):
 		wall_jump()
-	
+	if Input.is_action_pressed("left"):
+		$Sprite2D.flip_h = false
+	if Input.is_action_pressed("right"):
+		$Sprite2D.flip_h = true
 	# 移动角色
 	move_and_slide()  # 不需要传递参数，Godot 会自动使用 velocity
 
@@ -112,19 +109,21 @@ func dash():
 		dashing = false
 		$dash_cool.start()
 		dashenchurge = false
-
-func animation_adjust():
-	if Input.is_action_pressed("left"):
-		$Sprite2D.flip_h = false
-	elif Input.is_action_pressed("right"):
-		$Sprite2D.flip_h = true
+		$dash_audio.play()
 		
+func attack():
+	if Input.is_action_just_pressed("attack") and canattack == true:
+		$AnimationPlayer.play('attack')#播放攻击动画
+		$attack_audio.play()
+		$attack_cool.start()
+		$attack_yansi.start()
+		$walk_timer.stop()
+		canattack = false
 		
 func walk_animation():
-	if Input.is_action_pressed("left") and is_on_floor() and SPEED == 175:
+	if  is_on_floor() and SPEED == 175:
 		$AnimationPlayer.play("walk")
-	if Input.is_action_pressed("right") and is_on_floor() and SPEED == 175:
-		$AnimationPlayer.play("walk")
+		$walk_timer.start()
 
 
 	
@@ -136,14 +135,24 @@ func _on_dash_cool_timeout() -> void:
 func _on_dash_timer_timeout() -> void:
 	SPEED = 175
 	dash_gravity = Vector2(0, 980)
+	if velocity == Vector2.ZERO: #待机动画
+		$AnimationPlayer.play("idle")
 
 
 
+func _on_attack_cool_timeout() -> void:
+	canattack = true
 
 
 func _on_hazarddetectord_area_entered(area: Area2D) -> void:
 	get_tree().reload_current_scene() 
 
 
-func _on_attack_cool_timeout() -> void:
-	canattack = true
+func _on_attack_yansi_timeout() -> void:
+	if velocity == Vector2.ZERO: #待机动画
+		$AnimationPlayer.play("idle")
+
+
+func _on_walk_timer_timeout() -> void:
+	if velocity == Vector2.ZERO: #待机动画
+		$AnimationPlayer.play("idle")
