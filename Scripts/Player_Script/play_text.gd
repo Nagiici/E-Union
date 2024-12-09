@@ -17,8 +17,8 @@ var canattack = true
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and canattack == true:
-		#$AnimationPlayer.play('attack')#播放攻击动画
-		#$attack_cool.start()
+		$AnimationPlayer.play('attack')#播放攻击动画
+		$attack_cool.start()
 		canattack = false
 	# Add the gravity.
 	is_grounded = is_on_floor() or is_on_left_wall() or is_on_right_wall()
@@ -31,19 +31,19 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY  # First jump when grounded
 			jump_count = 1  # Set jump count to 1
 			is_grounded = false  # Character is now in the air
-			#$AnimationPlayer.play("jump_1")
+			$AnimationPlayer.play("jump_1")
 		elif jump_count == 1:
 			velocity.y = JUMP_VELOCITY * 85/100  # Second jump in the air
 			jump_count = 2  # Limit to only one extra jump in the air
-			#$AnimationPlayer.play("jump_2")
+			$AnimationPlayer.play("jump_2")
 		elif not is_grounded and (jump_count == 1 or jump_count == 0):
 			velocity.y = JUMP_VELOCITY * 85/100
 			jump_count = 2
-			#$AnimationPlayer.play("jump_2")
+			$AnimationPlayer.play("jump_2")
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
-	#walk_animation()
+	walk_animation()
 		
 	
 	
@@ -52,12 +52,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	#if velocity == Vector2.ZERO: #待机动画
-		#if Input.is_action_just_pressed("attack"):
-			#await get_tree().create_timer(3).timeout
-			#$AnimationPlayer.play('idle')
-		#else:
-			#$AnimationPlayer.play('idle')
+	if velocity == Vector2.ZERO: #待机动画
+		if Input.is_action_just_pressed("attack"):
+			await get_tree().create_timer(3).timeout
+			$AnimationPlayer.play('idle 1')
+		else:
+			$AnimationPlayer.play('idle 2')
 	
 	move_and_slide()
 	dash()
@@ -79,7 +79,7 @@ func wall_jump():
 	# 根据角色在墙上的方向施加蹬墙跳跃力
 	var wall_dir = -1 if is_on_left_wall() else 1  # 左墙为 -1，右墙为 1
 	velocity = Vector2(WALL_JUMP_FORCE.x * wall_dir, WALL_JUMP_FORCE.y)  # 直接设置 velocity
-	#$AnimationPlayer.play("jump_2")
+	$AnimationPlayer.play("jump_2")
 
 func is_on_left_wall():
 	# 判断角色是否接触左侧墙壁
@@ -96,7 +96,7 @@ func dash():
 	
 	if Input.is_action_just_pressed("dash") and canDash and dashenchurge:
 		SPEED= 600
-		#$AnimationPlayer.play("dash")
+		$AnimationPlayer.play("dash")
 		if Input.is_action_pressed("left"):
 			$Sprite2D.flip_h = true
 		if Input.is_action_pressed("right"):
@@ -109,13 +109,13 @@ func dash():
 		$dash_cool.start()
 		dashenchurge = false
 		
-#func walk_animation():
-	#if Input.is_action_pressed("left") and is_on_floor() and SPEED == 175:
-		#$AnimationPlayer.play("walk")
-		#$Sprite2D.flip_h = false
-	#if Input.is_action_pressed("right") and is_on_floor() and SPEED == 175:
-		#$AnimationPlayer.play("walk")
-		#$Sprite2D.flip_h = true
+func walk_animation():
+	if Input.is_action_pressed("left") and is_on_floor() and SPEED == 175:
+		$AnimationPlayer.play("walk")
+		$Sprite2D.flip_h = false
+	if Input.is_action_pressed("right") and is_on_floor() and SPEED == 175:
+		$AnimationPlayer.play("walk")
+		$Sprite2D.flip_h = true
 
 
 	
