@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bjfbahciyjdtq"]
 
-[ext_resource type="Script" path="res://Scripts/Player_Script/play_test.gd" id="1_15027"]
+[ext_resource type="Script" path="res://Scripts/Player_Script/play_text.gd" id="1_i0332"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_te500"]
 [ext_resource type="Texture2D" uid="uid://q4g0of8afhny" path="res://art/character/Player.png" id="2_5rvbb"]
 [ext_resource type="AudioStream" uid="uid://ump3gnyj3ale" path="res://art/Audio/冲刺 windy 120 bpm.wav" id="5_xtlon"]
@@ -166,7 +166,7 @@ _data = {
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(169, 114)
-script = ExtResource("1_15027")
+script = ExtResource("1_i0332")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(11, 12)
