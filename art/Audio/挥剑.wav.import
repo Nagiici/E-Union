@@ -2,7 +2,11 @@
 
 importer="wav"
 type="AudioStreamWAV"
+<<<<<<< HEAD
+uid="uid://4hibltceoeym"
+=======
 uid="uid://t4xo2cnqjqg3"
+>>>>>>> 262d326b986d34c55e7d1b4a445a868cb8c39c0d
 path="res://.godot/imported/挥剑.wav-136f84fa37729d5a08c539b62650d9c7.sample"
 
 [deps]

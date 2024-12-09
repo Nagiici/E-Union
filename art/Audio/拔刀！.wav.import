@@ -2,7 +2,11 @@
 
 importer="wav"
 type="AudioStreamWAV"
+<<<<<<< HEAD
+uid="uid://dqylwxg47uu86"
+=======
 uid="uid://dj2tf6tlbi2ph"
+>>>>>>> 262d326b986d34c55e7d1b4a445a868cb8c39c0d
 path="res://.godot/imported/拔刀！.wav-7793c625c096d9f900fd1811640aa69f.sample"
 
 [deps]
