@@ -13,6 +13,7 @@ config_version=5
 config/name="E-Union"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+"<<<<<<<HEAD[rendering]textures/canvas_textures/default_texture_filter"=0
 
 [rendering]
 

@@ -10,22 +10,16 @@ func dash():
 	
 	if Input.is_action_just_pressed("dash") and canDash and dashenchurge:
 		SPEED= 600
+		$AnimationPlayer.play("dash")
+		if Input.is_action_pressed("left"):
+			$Sprite2D.flip_h = true
+		if Input.is_action_pressed("right"):
+			$Sprite2D.flip_h = false
 		$DashTimer.start()
-		dash_gravity = Vector2.ZERO  
+		velocity.y = 0
 		canDash = false
 		dashing = true
 		dashing = false
 		$dash_cool.start()
 		dashenchurge = false
-
-
-
-	
-
-
-func _on_dash_cool_timeout() -> void:
-	canDash = true
-
-func _on_dash_timer_timeout() -> void:
-	SPEED = 200
-	dash_gravity = Vector2(0, 980)
+		$dash_audio.play()
