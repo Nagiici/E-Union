@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_te500"]
 [ext_resource type="Texture2D" uid="uid://q4g0of8afhny" path="res://art/character/Player.png" id="2_5rvbb"]
 [ext_resource type="AudioStream" uid="uid://ump3gnyj3ale" path="res://art/Audio/冲刺 windy 120 bpm.wav" id="5_xtlon"]
-[ext_resource type="AudioStream" uid="uid://t4xo2cnqjqg3" path="res://art/Audio/挥剑.wav" id="6_dxc6g"]
-[ext_resource type="PackedScene" path="res://sence/hitbox.tscn" id="6_khrxx"]
+[ext_resource type="AudioStream" uid="uid://cr2jdjpgt0mt8" path="res://art/Audio/挥剑.wav" id="6_dxc6g"]
+[ext_resource type="PackedScene" uid="uid://bkjk0aqmmd55p" path="res://sence/hitbox.tscn" id="6_khrxx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bof5"]
 size = Vector2(8, 38)
@@ -106,7 +106,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_o8un1"]
 resource_name = "jump_1"
-step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -122,7 +121,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_q11id"]
 resource_name = "jump_2"
-step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -139,7 +137,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_esl34"]
 resource_name = "walk"
 length = 1.1
-step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

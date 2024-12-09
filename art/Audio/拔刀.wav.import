@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cr2jdjpgt0mt8"
-path="res://.godot/imported/挥剑.wav-136f84fa37729d5a08c539b62650d9c7.sample"
+uid="uid://bnqe70l206a3i"
+path="res://.godot/imported/拔刀.wav-d55bb5963f28e4a84799c8ab025a06fa.sample"
 
 [deps]
 
-source_file="res://art/Audio/挥剑.wav"
-dest_files=["res://.godot/imported/挥剑.wav-136f84fa37729d5a08c539b62650d9c7.sample"]
+source_file="res://art/Audio/拔刀.wav"
+dest_files=["res://.godot/imported/拔刀.wav-d55bb5963f28e4a84799c8ab025a06fa.sample"]
 
 [params]
 

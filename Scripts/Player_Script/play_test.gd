@@ -123,7 +123,7 @@ func attack():
 func walk_animation():
 	if  is_on_floor() and SPEED == 175:
 		$AnimationPlayer.play("walk")
-		$walk_timer.start()
+	$walk_timer.start()
 
 
 	
@@ -150,9 +150,9 @@ func _on_hazarddetectord_area_entered(area: Area2D) -> void:
 
 func _on_attack_yansi_timeout() -> void:
 	if velocity == Vector2.ZERO: #待机动画
-		$AnimationPlayer.play("idle")
+		$AnimationPlayer.play("idle 1")
 
 
 func _on_walk_timer_timeout() -> void:
 	if velocity == Vector2.ZERO: #待机动画
-		$AnimationPlayer.play("idle")
+		$AnimationPlayer.play("idle 2")

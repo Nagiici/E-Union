@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dh7hpt4231qtg"]
 
-[ext_resource type="Script" path="res://hurtbox.gd" id="1_v5l5m"]
+[ext_resource type="Script" path="res://Scripts/hurtbox.gd" id="1_v5l5m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nqtsl"]
 size = Vector2(39, 53)
