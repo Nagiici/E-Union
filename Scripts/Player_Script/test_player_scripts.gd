@@ -1,127 +1,109 @@
 extends CharacterBody2D
 
+# 定义常量和变量
 var SPEED = 175
 const JUMP_VELOCITY = -400.0
-var dashDirection:Vector2 = Vector2(1,0)
+var dashDirection: Vector2 = Vector2(1, 0)
 var canDash = true
 var dashing = false
 var is_grounded: bool = false
 var jump_count = 0
-var dashenchurge:bool = false
+var dashenchurge: bool = false
 const WALL_JUMP_FORCE = Vector2(-200, -400)  # 蹬墙跳跃时的力量
 var is_wall_sliding = false
-var dash_gravity = Vector2(0, 980)  #设定该变量为力
+const DASH_SPEED = 600  # 冲刺速度
+var dash_gravity = Vector2(0, 980)  # 设定该变量为力
 var canattack = true
 
+# 当前动画状态
+var current_animation = "idle 1"  # 默认动画
+
 func _ready() -> void:
-	$AnimationPlayer.play("idle 1")  # 默认播放 idle 1
+	play_animation("idle 1")  # 初始化待机动画
 
 func _physics_process(delta: float) -> void:
-	attack()
+	# 更新是否在地面
 	is_grounded = is_on_floor()
 
 	# 添加重力
 	if not is_grounded:
-		velocity += dash_gravity * delta
-
-	# 获取输入方向并处理移动
-	var direction := Input.get_axis("left", "right")
-	if direction != 0:
-		velocity.x = direction * SPEED
-		$Sprite2D.flip_h = direction < 0  # 左移时翻转
-		if is_grounded:
-			$AnimationPlayer.play("walk")  # 行走动画
+		velocity.y += dash_gravity.y * delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		if is_grounded:
-			play_random_idle_animation()
+		velocity.y = 0  # 当角色在地面时，重置垂直速度
 
-	# 处理跳跃
-	if Input.is_action_just_pressed("jump"):
-		handle_jump()
+	# 处理逻辑
+	if dashing:
+		handle_dash_movement()  # 冲刺期间只执行冲刺移动逻辑
+	else:
+		handle_movement()  # 执行普通移动逻辑
 
-	# 检测墙壁滑动
-	handle_wall_slide()
-
-	# 检测冲刺
-	dash()
+	# 检查冲刺输入
+	handle_dash()
 
 	# 移动角色
 	move_and_slide()
 
-func handle_jump():
-	if is_grounded:
-		velocity.y = JUMP_VELOCITY
-		jump_count = 1
-		$AnimationPlayer.play("jump_1")
-	elif jump_count == 1:
-		velocity.y = JUMP_VELOCITY * 0.85
-		jump_count = 27
-		$AnimationPlayer.play("jump_2")
+func handle_movement() -> void:
+	var direction = Input.get_axis("left", "right")
 
-func handle_wall_slide():
-	if is_on_wall() and velocity.y > 0:
-		is_wall_sliding = true
-		velocity.y = 50  # 设置角色下滑速度
+	if direction != 0:
+		velocity.x = direction * SPEED
+		$AnimationPlayer.flip_h = direction > 0
+		play_animation("walk")
 	else:
-		is_wall_sliding = false
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if abs(velocity.x) < 0.1:
+			velocity.x = 0
+			if is_grounded:
+				play_random_idle_animation()
 
-	if is_wall_sliding and Input.is_action_just_pressed("jump"):
-		wall_jump()
-
-func wall_jump():
-	var wall_dir = -1 if is_on_left_wall() else 1
-	velocity = Vector2(WALL_JUMP_FORCE.x * wall_dir, WALL_JUMP_FORCE.y)
-	$AnimationPlayer.play("jump_2")
-
-func dash():
-	if is_grounded:
+func handle_dash() -> void:
+	if is_on_floor():
 		dashenchurge = true
-
+	# 检测是否可以冲刺（只能触发一次）
 	if Input.is_action_just_pressed("dash") and canDash and dashenchurge:
-		SPEED = 600
+		SPEED= 600
 		$AnimationPlayer.play("dash")
+		if Input.is_action_pressed("left"):
+			$AnimationPlayer.flip_h = true
+		if Input.is_action_pressed("right"):
+			$AnimationPlayer.flip_h = false
 		$DashTimer.start()
 		velocity.y = 0
 		canDash = false
+		dashing = true
+		dashing = false
 		$dash_cool.start()
 		dashenchurge = false
 		$dash_audio.play()
 
-func attack():
-	if Input.is_action_just_pressed("attack") and canattack:
-		$AnimationPlayer.play("attack")
-		$attack_audio.play()
-		$attack_cool.start()
-		$attack_yansi.start()
-		canattack = false
+# 冲刺移动逻辑
+func handle_dash_movement() -> void:
+	# 冲刺期间固定速度，不受其他逻辑干扰
+	velocity.x = dashDirection.x * DASH_SPEED
 
-func play_random_idle_animation():
-	if not $AnimationPlayer.is_playing():
+# 动画播放逻辑，避免重复播放
+func play_animation(name: String) -> void:
+	if current_animation != name:
+		current_animation = name
+		$AnimationPlayer.play(name)
+
+# 随机播放 idle 动画
+func play_random_idle_animation() -> void:
+	if current_animation != "idle 1" and current_animation != "idle 2":
 		var idle_animation = "idle 1" if randi() % 2 == 0 else "idle 2"
-		$AnimationPlayer.play(idle_animation)
+		play_animation(idle_animation)
 
-func is_on_left_wall():
-	return is_on_wall() and get_wall_normal().x > 0
-
-func is_on_right_wall():
-	return is_on_wall() and get_wall_normal().x < 0
-
+# 冲刺冷却计时器
 func _on_dash_cool_timeout() -> void:
-	canDash = true
-
-func _on_dash_timer_timeout() -> void:
+	canDash = true  # 允许再次冲刺
+	print("Dash cooldown ended.")  # 调试输出
+	
+# 冲刺计时器超时
+func _on_DashTimer_timeout() -> void:
 	SPEED = 175
 	dash_gravity = Vector2(0, 980)
-	if velocity == Vector2.ZERO and is_grounded:
-		play_random_idle_animation()
+	if is_grounded:
+		play_random_idle_animation()  # 播放随机待机动画
 
-func _on_attack_cool_timeout() -> void:
-	canattack = true
 
-func _on_hazarddetectord_area_entered(area: Area2D) -> void:
-	get_tree().reload_current_scene()
-
-func _on_attack_yansi_timeout() -> void:
-	if velocity == Vector2.ZERO and is_grounded:
-		play_random_idle_animation()

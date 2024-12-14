@@ -1,7 +1,9 @@
-[gd_scene load_steps=65 format=3 uid="uid://tsbq2gndb5ic"]
+[gd_scene load_steps=67 format=3 uid="uid://tsbq2gndb5ic"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script/test_player_scripts.gd" id="1_5pu3j"]
 [ext_resource type="Texture2D" uid="uid://q4g0of8afhny" path="res://art/character/Player.png" id="2_pipx1"]
+[ext_resource type="AudioStream" uid="uid://ump3gnyj3ale" path="res://art/Audio/冲刺 windy 120 bpm.wav" id="3_10bmr"]
+[ext_resource type="AudioStream" uid="uid://cr2jdjpgt0mt8" path="res://art/Audio/挥剑.wav" id="4_eh7qx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k6rm1"]
 atlas = ExtResource("2_pipx1")
@@ -462,41 +464,34 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0w7i"]
-size = Vector2(10, 55)
+size = Vector2(10, 47)
 
 [node name="Test_Player" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_5pu3j")
 
-[node name="AnimationPlayer" type="AnimatedSprite2D" parent="CharacterBody2D"]
-position = Vector2(-3, -32)
-sprite_frames = SubResource("SpriteFrames_0adn4")
-animation = &"idle 1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, -28.5)
-shape = SubResource("RectangleShape2D_i0w7i")
-
-[node name="dash_cool" type="Timer" parent="CharacterBody2D"]
-
 [node name="DashTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 0.2
 one_shot = true
 
-[node name="attack_cool" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.25
+[node name="dash_cool" type="Timer" parent="CharacterBody2D"]
 
-[node name="attack_yansi" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.25
+[node name="AnimationPlayer" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-3, -32)
+sprite_frames = SubResource("SpriteFrames_0adn4")
+animation = &"walk"
 
-[node name="walk_timer" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.001
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_i0w7i")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
-position = Vector2(11.625, 14.2871)
-scale = Vector2(0.792969, 0.792969)
-texture = ExtResource("2_pipx1")
-hframes = 10
-vframes = 9
+[node name="dash_audio" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("3_10bmr")
+
+[node name="attack_audio" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("4_eh7qx")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(-2, -55)
+zoom = Vector2(2, 2)
