@@ -96,7 +96,7 @@ func dash():
 		
 	
 	if Input.is_action_just_pressed("dash") and canDash and dashenchurge:
-		SPEED= 600
+		SPEED= 500
 		$AnimationPlayer.play("dash")
 		if Input.is_action_pressed("left"):
 			$Sprite2D.flip_h = true
@@ -150,9 +150,9 @@ func _on_hazarddetectord_area_entered(area: Area2D) -> void:
 
 func _on_attack_yansi_timeout() -> void:
 	if velocity == Vector2.ZERO: #待机动画
-		$AnimationPlayer.play("idle 1")
+		$AnimationPlayer.play("idle")
 
 
 func _on_walk_timer_timeout() -> void:
 	if velocity == Vector2.ZERO: #待机动画
-		$AnimationPlayer.play("idle 2")
+		$AnimationPlayer.play("idle")
