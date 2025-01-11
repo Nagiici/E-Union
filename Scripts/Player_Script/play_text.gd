@@ -16,7 +16,7 @@ var canattack = true
 
 func _ready() -> void:
 	$AnimationPlayer.play("idle")
-
+	$walk_audio.stream_paused = true
 func _physics_process(delta: float) -> void:
 	attack()
 	# Add the gravity.
@@ -31,14 +31,17 @@ func _physics_process(delta: float) -> void:
 			jump_count = 1  # Set jump count to 1
 			is_grounded = false  # Character is now in the air
 			$AnimationPlayer.play("jump_1")
+			$jump_1_audio.play()
 		elif jump_count == 1:
 			velocity.y = JUMP_VELOCITY * 85/100  # Second jump in the air
 			jump_count = 2  # Limit to only one extra jump in the air
 			$AnimationPlayer.play("jump_2")
+			$jump_2_audio.play()
 		elif not is_grounded and (jump_count == 1 or jump_count == 0):
 			velocity.y = JUMP_VELOCITY * 85/100
 			jump_count = 2
 			$AnimationPlayer.play("jump_2")
+			$jump_2_audio.play()
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
@@ -76,6 +79,7 @@ func wall_jump():
 	# 根据角色在墙上的方向施加蹬墙跳跃力
 	var wall_dir = -1 if is_on_left_wall() else 1  # 左墙为 -1，右墙为 1
 	velocity = Vector2(WALL_JUMP_FORCE.x * wall_dir, WALL_JUMP_FORCE.y)  # 直接设置 velocity
+	$jump_2_audio.play()
 	#$AnimationPlayer.play("jump_2")
 
 func is_on_left_wall():
@@ -109,7 +113,11 @@ func dash():
 func walk_animation():
 	if velocity.x != 0 and is_on_floor() and SPEED == 175:
 		$AnimationPlayer.play("walk")
+		if not $walk_audio.playing:
+			$walk_audio.stream_paused = false
 		$walk_timer.start()
+	elif velocity.x == 0 or not is_grounded:
+		$walk_audio.stream_paused=true
 
 
 		

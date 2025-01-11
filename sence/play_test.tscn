@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjfbahciyjdtq"]
+[gd_scene load_steps=20 format=3 uid="uid://bjfbahciyjdtq"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script/play_text.gd" id="1_i0332"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_te500"]
@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://ump3gnyj3ale" path="res://art/Audio/冲刺 windy 120 bpm.wav" id="5_xtlon"]
 [ext_resource type="AudioStream" uid="uid://cr2jdjpgt0mt8" path="res://art/Audio/挥剑.wav" id="6_dxc6g"]
 [ext_resource type="PackedScene" uid="uid://bkjk0aqmmd55p" path="res://sence/hitbox.tscn" id="6_khrxx"]
+[ext_resource type="AudioStream" uid="uid://cnugrbsd25khq" path="res://art/Audio/跳跃.wav" id="7_jf1f5"]
+[ext_resource type="AudioStream" uid="uid://d1myj0m6qcxxk" path="res://art/Audio/二段跳.wav" id="8_dk3mb"]
+[ext_resource type="AudioStream" uid="uid://df378ia4ept7g" path="res://art/Audio/脚步 沙砾上行走 四声循环 bpm 120.wav" id="9_d7msg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bof5"]
 size = Vector2(8, 38)
@@ -225,6 +228,16 @@ stream = ExtResource("5_xtlon")
 
 [node name="attack_audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_dxc6g")
+
+[node name="jump_1_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jf1f5")
+
+[node name="jump_2_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_dk3mb")
+
+[node name="walk_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_d7msg")
+autoplay = true
 
 [connection signal="timeout" from="dash_cool" to="." method="_on_dash_cool_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
