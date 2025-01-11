@@ -1550,7 +1550,10 @@ scale = Vector2(3, 1)
 texture = ExtResource("2_xd66l")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_3wvy3")]
+<<<<<<< HEAD
 position = Vector2(-954, 337)
+=======
+
 
 [editable path="CharacterBody2D"]
 [editable path="CharacterBody2D/Hitbox"]
