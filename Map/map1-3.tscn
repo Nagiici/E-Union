@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpbdpjny032bw"]
+[gd_scene load_steps=8 format=3 uid="uid://cpbdpjny032bw"]
 
 [ext_resource type="Texture2D" uid="uid://br1dk7ehajoq3" path="res://art/2 Background/Background.png" id="1_sttu6"]
 [ext_resource type="Texture2D" uid="uid://besvnxk2guqx5" path="res://art/1 Tiles/Tileset.png" id="2_h4b5b"]
 [ext_resource type="PackedScene" uid="uid://tsbq2gndb5ic" path="res://Scripts/Player_Script/Test_Player.tscn" id="3_iqjnj"]
+[ext_resource type="AudioStream" uid="uid://b4q2cw70sym0m" path="res://art/Audio/飞沙背景.wav" id="4_yx1lo"]
+[ext_resource type="Script" path="res://Map/audio_stream_player.gd" id="5_pdshg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fig4v"]
 texture = ExtResource("2_h4b5b")
@@ -320,4 +322,10 @@ layer_0/tile_data = PackedInt32Array(3211265, 65539, 0, 3211266, 131075, 0, 3211
 [node name="Test_Player" parent="TileMap" instance=ExtResource("3_iqjnj")]
 position = Vector2(233, 772)
 
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yx1lo")
+script = ExtResource("5_pdshg")
+
 [editable path="TileMap/Test_Player"]
+[editable path="TileMap/Test_Player/CharacterBody2D"]
+[editable path="TileMap/Test_Player/CharacterBody2D/Hitbox"]

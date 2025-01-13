@@ -2,3 +2,4 @@
 .godot/
 .vscode/
 *.log
+*.tmp
