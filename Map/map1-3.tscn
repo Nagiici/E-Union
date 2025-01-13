@@ -319,3 +319,7 @@ layer_0/tile_data = PackedInt32Array(3211265, 65539, 0, 3211266, 131075, 0, 3211
 
 [node name="Test_Player" parent="TileMap" instance=ExtResource("3_iqjnj")]
 position = Vector2(233, 772)
+
+[editable path="TileMap/Test_Player"]
+[editable path="TileMap/Test_Player/CharacterBody2D"]
+[editable path="TileMap/Test_Player/CharacterBody2D/Hitbox"]

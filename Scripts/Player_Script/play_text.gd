@@ -20,28 +20,25 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	attack()
 	# Add the gravity.
-	is_grounded = is_on_floor() or is_on_left_wall() or is_on_right_wall()
+	is_grounded = is_on_floor() or is_on_wall()
 	if not is_on_floor():
 		velocity += dash_gravity * delta
-		
+	if is_on_floor():
+		jump_count = 0
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"):
-		if is_grounded:
+		if is_grounded and jump_count == 0:
 			velocity.y = JUMP_VELOCITY  # First jump when grounded
 			jump_count = 1  # Set jump count to 1
 			is_grounded = false  # Character is now in the air
 			$AnimationPlayer.play("jump_1")
 			$jump_1_audio.play()
-		elif jump_count == 1:
-			velocity.y = JUMP_VELOCITY * 85/100  # Second jump in the air
-			jump_count = 2  # Limit to only one extra jump in the air
-			$AnimationPlayer.play("jump_2")
-			$jump_2_audio.play()
 		elif not is_grounded and (jump_count == 1 or jump_count == 0):
 			velocity.y = JUMP_VELOCITY * 85/100
 			jump_count = 2
 			$AnimationPlayer.play("jump_2")
 			$jump_2_audio.play()
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
