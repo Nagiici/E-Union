@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-[gd_scene load_steps=6 format=3 uid="uid://c83miygwgrj4m"]
-
-[ext_resource type="Texture2D" uid="uid://besvnxk2guqx5" path="res://art/1 Tiles/Tileset.png" id="1_vrg5v"]
-[ext_resource type="Texture2D" uid="uid://ck1nv3pir2s2c" path="res://art/3 Objects/spike/Idle.png" id="2_xd66l"]
-=======
 [gd_scene load_steps=13 format=3 uid="uid://c83miygwgrj4m"]
 
 [ext_resource type="Texture2D" uid="uid://besvnxk2guqx5" path="res://art/1 Tiles/Tileset.png" id="1_vrg5v"]
@@ -15,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://df378ia4ept7g" path="res://art/Audio/脚步 沙砾上行走 四声循环 bpm 120.wav" id="7_0ic8t"]
 [ext_resource type="AudioStream" uid="uid://b4q2cw70sym0m" path="res://art/Audio/飞沙背景.wav" id="8_auvxv"]
 [ext_resource type="Script" path="res://Map/audio_stream_player.gd" id="9_oweoy"]
->>>>>>> bacc421d74bff2d794d94c13ecb75023fbd38a7a
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hugr"]
 texture = ExtResource("1_vrg5v")
@@ -1561,8 +1554,6 @@ position = Vector2(6.5, 0)
 rotation = 1.5708
 scale = Vector2(3, 1)
 texture = ExtResource("2_xd66l")
-<<<<<<< HEAD
-=======
 
 [node name="dash_audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_khf6n")
@@ -1592,4 +1583,3 @@ wait_time = 0.25
 [node name="background" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_auvxv")
 script = ExtResource("9_oweoy")
->>>>>>> bacc421d74bff2d794d94c13ecb75023fbd38a7a
