@@ -17,7 +17,11 @@ func take_damage(damage: int) -> void:
 # Method to handle character death
 func die() -> void:
 	is_alive = false
-	queue_free()  # Remove the character from the scene
+	get_tree().reload_current_scene()  # Remove the character from the scene
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed('R'):
 		get_tree().reload_current_scene() 
+
+
+func _on_hazarddetectord_area_entered(area: Area2D) -> void:
+	take_damage(100)

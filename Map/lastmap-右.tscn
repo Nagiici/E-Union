@@ -1,7 +1,21 @@
+<<<<<<< HEAD
 [gd_scene load_steps=6 format=3 uid="uid://c83miygwgrj4m"]
 
 [ext_resource type="Texture2D" uid="uid://besvnxk2guqx5" path="res://art/1 Tiles/Tileset.png" id="1_vrg5v"]
 [ext_resource type="Texture2D" uid="uid://ck1nv3pir2s2c" path="res://art/3 Objects/spike/Idle.png" id="2_xd66l"]
+=======
+[gd_scene load_steps=13 format=3 uid="uid://c83miygwgrj4m"]
+
+[ext_resource type="Texture2D" uid="uid://besvnxk2guqx5" path="res://art/1 Tiles/Tileset.png" id="1_vrg5v"]
+[ext_resource type="Texture2D" uid="uid://ck1nv3pir2s2c" path="res://art/3 Objects/spike/Idle.png" id="2_xd66l"]
+[ext_resource type="AudioStream" uid="uid://ump3gnyj3ale" path="res://art/Audio/冲刺 windy 120 bpm.wav" id="3_khf6n"]
+[ext_resource type="AudioStream" uid="uid://cr2jdjpgt0mt8" path="res://art/Audio/挥剑.wav" id="4_k2mip"]
+[ext_resource type="AudioStream" uid="uid://cnugrbsd25khq" path="res://art/Audio/跳跃.wav" id="5_8cqdc"]
+[ext_resource type="AudioStream" uid="uid://d1myj0m6qcxxk" path="res://art/Audio/二段跳.wav" id="6_xcglu"]
+[ext_resource type="AudioStream" uid="uid://df378ia4ept7g" path="res://art/Audio/脚步 沙砾上行走 四声循环 bpm 120.wav" id="7_0ic8t"]
+[ext_resource type="AudioStream" uid="uid://b4q2cw70sym0m" path="res://art/Audio/飞沙背景.wav" id="8_auvxv"]
+[ext_resource type="Script" path="res://Map/audio_stream_player.gd" id="9_oweoy"]
+>>>>>>> bacc421d74bff2d794d94c13ecb75023fbd38a7a
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hugr"]
 texture = ExtResource("1_vrg5v")
@@ -1547,3 +1561,35 @@ position = Vector2(6.5, 0)
 rotation = 1.5708
 scale = Vector2(3, 1)
 texture = ExtResource("2_xd66l")
+<<<<<<< HEAD
+=======
+
+[node name="dash_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_khf6n")
+
+[node name="attack_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_k2mip")
+
+[node name="jump_1_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8cqdc")
+
+[node name="jump_2_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xcglu")
+
+[node name="walk_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_0ic8t")
+autoplay = true
+
+[node name="attack_cool" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="attack_yansi" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="attack_cool2" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_auvxv")
+script = ExtResource("9_oweoy")
+>>>>>>> bacc421d74bff2d794d94c13ecb75023fbd38a7a

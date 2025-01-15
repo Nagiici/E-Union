@@ -105,5 +105,3 @@ func _on_DashTimer_timeout() -> void:
 	dash_gravity = Vector2(0, 980)
 	if is_grounded:
 		play_random_idle_animation()  # 播放随机待机动画
-
-

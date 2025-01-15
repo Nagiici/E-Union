@@ -146,9 +146,6 @@ func _on_attack_cool_timeout() -> void:
 	canattack = true
 
 
-func _on_hazarddetectord_area_entered(area: Area2D) -> void:
-	get_tree().reload_current_scene() 
-
 
 func _on_attack_yansi_timeout() -> void:
 	if velocity == Vector2.ZERO: #待机动画
