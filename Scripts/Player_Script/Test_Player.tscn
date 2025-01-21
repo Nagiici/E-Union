@@ -4,7 +4,7 @@
 
 [node name="Test_Player" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_l7de7")]
+[node name="Player" parent="." instance=ExtResource("1_l7de7")]
 
-[editable path="CharacterBody2D"]
-[editable path="CharacterBody2D/Hitbox"]
+[editable path="Player"]
+[editable path="Player/Sprite2D/Hitbox"]

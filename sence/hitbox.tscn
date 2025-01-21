@@ -3,13 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="1_ohulq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qb6l"]
-size = Vector2(21, 41)
+size = Vector2(38.9376, 41)
 
 [node name="Hitbox" type="Area2D"]
 script = ExtResource("1_ohulq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(38, 14)
+position = Vector2(53.3751, 14)
 shape = SubResource("RectangleShape2D_6qb6l")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]

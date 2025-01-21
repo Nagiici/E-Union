@@ -466,7 +466,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0hugr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n01oy"]
-size = Vector2(1.32223, 17.3333)
+size = Vector2(1.2, 13.3332)
 
 [node name="Node2D" type="Node2D"]
 

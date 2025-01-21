@@ -1,6 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://b86bows5nbsnn"]
+[gd_scene load_steps=10 format=3 uid="uid://b86bows5nbsnn"]
 
 [ext_resource type="Texture2D" uid="uid://0yeyhiqxsbaw" path="res://art/Enemy/Enemy1.png" id="1_dccab"]
+[ext_resource type="Script" path="res://sence/enemy_2.gd" id="1_ufeit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_soy44"]
+size = Vector2(47, 38)
+
+[sub_resource type="Animation" id="Animation_m3yyh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_jd5yf"]
 resource_name = "die"
@@ -17,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-
-[sub_resource type="Animation" id="Animation_m3yyh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_v1au8"]
@@ -77,14 +81,45 @@ _data = {
 "idle": SubResource("Animation_heagi")
 }
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjykr"]
+size = Vector2(20, 32)
+
+[node name="enemy2" type="RigidBody2D"]
+script = ExtResource("1_ufeit")
+metadata/_edit_vertical_guides_ = [-501.0, 3.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_dccab")
 hframes = 13
 vframes = 9
+
+[node name="hurtbox" type="Area2D" parent="Sprite2D"]
+position = Vector2(20, 15)
+scale = Vector2(5, 5)
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hurtbox"]
+light_mask = 2
+position = Vector2(-2.5, -2)
+shape = SubResource("RectangleShape2D_soy44")
+
+[node name="RayCast2D" type="RayCast2D" parent="Sprite2D"]
+scale = Vector2(50, 100)
+target_position = Vector2(-34.1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ddy3g")
 }
+
+[node name="shoot_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_mjykr")
+
+[connection signal="area_entered" from="Sprite2D/hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
