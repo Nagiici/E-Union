@@ -36,8 +36,8 @@ func _physics_process(delta: float) -> void:
 			is_grounded = false  # Character is now in the air
 			$AnimationPlayer.play("jump_1")
 			$jump_1_audio.play()
-		elif not is_grounded and (jump_count == 1 or jump_count == 0):
-			velocity.y = JUMP_VELOCITY * 85/100
+		elif not is_grounded and is_wall_sliding == false and (jump_count == 1 or jump_count == 0):
+			velocity.y = JUMP_VELOCITY * 60/100
 			jump_count = 2
 			$AnimationPlayer.play("jump_2")
 			$jump_2_audio.play()
@@ -62,15 +62,16 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	dash()
-	if is_on_wall() and velocity.y > 0:
+	if is_on_wall():
 		is_wall_sliding = true
-		velocity.y = 50  # 设置角色下滑的速度
-	else:
-		is_wall_sliding = false
-
+	
+	if is_on_wall() and velocity.y >0:
+		velocity.y = 50
 	# 检查蹬墙跳跃
 	if is_wall_sliding and Input.is_action_just_pressed("jump"):
 		wall_jump()
+		is_wall_sliding = false
+		
 	if Input.is_action_pressed("left"):
 		$Sprite2D.flip_h = false
 	if Input.is_action_pressed("right"):
@@ -85,7 +86,7 @@ func wall_jump():
 	var wall_dir = -1 if is_on_left_wall() else 1  # 左墙为 -1，右墙为 1
 	velocity = Vector2(WALL_JUMP_FORCE.x * wall_dir, WALL_JUMP_FORCE.y)  # 直接设置 velocity
 	$jump_2_audio.play()
-	#$AnimationPlayer.play("jump_2")
+	$AnimationPlayer.play('jump_2')
 
 func is_on_left_wall():
 	# 判断角色是否接触左侧墙壁

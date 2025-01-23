@@ -199,7 +199,7 @@ collision_mask = 16
 script = null
 
 [node name="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
-position = Vector2(-7.06252, 14)
+position = Vector2(-4.00001, 14)
 disabled = true
 
 [node name="Node" type="Node" parent="."]
