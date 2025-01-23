@@ -1,0 +1,260 @@
+[gd_scene load_steps=20 format=3 uid="uid://bjfbahciyjdtq"]
+
+[ext_resource type="Script" path="res://Scripts/Player_Script/play_text.gd" id="1_i0332"]
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_te500"]
+[ext_resource type="Texture2D" uid="uid://q4g0of8afhny" path="res://art/character/Player.png" id="2_5rvbb"]
+[ext_resource type="AudioStream" uid="uid://ump3gnyj3ale" path="res://art/Audio/冲刺 windy 120 bpm.wav" id="5_xtlon"]
+[ext_resource type="AudioStream" uid="uid://cr2jdjpgt0mt8" path="res://art/Audio/挥剑.wav" id="6_dxc6g"]
+[ext_resource type="PackedScene" uid="uid://bkjk0aqmmd55p" path="res://sence/hitbox.tscn" id="6_khrxx"]
+[ext_resource type="AudioStream" uid="uid://cnugrbsd25khq" path="res://art/Audio/跳跃.wav" id="7_jf1f5"]
+[ext_resource type="AudioStream" uid="uid://d1myj0m6qcxxk" path="res://art/Audio/二段跳.wav" id="8_dk3mb"]
+[ext_resource type="AudioStream" uid="uid://df378ia4ept7g" path="res://art/Audio/脚步 沙砾上行走 四声循环 bpm 120.wav" id="9_d7msg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bof5"]
+size = Vector2(7, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tiac"]
+size = Vector2(7.00002, 38)
+
+[sub_resource type="Animation" id="Animation_cp6dq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5qdvx"]
+resource_name = "attack"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 63, 64, 65, 66, 67]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.075, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_1kgoa"]
+resource_name = "dash"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [58, 57, 56, 55, 54, 53, 52, 51, 50]
+}
+
+[sub_resource type="Animation" id="Animation_bcdi4"]
+resource_name = "idle"
+length = 5.0
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3, 3.3, 3.6, 3.9, 4.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+}
+
+[sub_resource type="Animation" id="Animation_o8un1"]
+resource_name = "jump_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17, 20, 21]
+}
+
+[sub_resource type="Animation" id="Animation_q11id"]
+resource_name = "jump_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_esl34"]
+resource_name = "walk"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [70, 71, 72, 73, 74, 75, 76, 77, 80, 81, 82]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qdvvq"]
+_data = {
+"RESET": SubResource("Animation_cp6dq"),
+"attack": SubResource("Animation_5qdvx"),
+"dash": SubResource("Animation_1kgoa"),
+"idle": SubResource("Animation_bcdi4"),
+"jump_1": SubResource("Animation_o8un1"),
+"jump_2": SubResource("Animation_q11id"),
+"walk": SubResource("Animation_esl34")
+}
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(169, 114)
+script = ExtResource("1_i0332")
+metadata/Player = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+position = Vector2(13.5, 12.5)
+shape = SubResource("RectangleShape2D_8bof5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(11.625, 14.2871)
+scale = Vector2(0.792969, 0.792969)
+texture = ExtResource("2_5rvbb")
+hframes = 10
+vframes = 9
+
+[node name="hazarddetectord" type="Area2D" parent="Sprite2D"]
+position = Vector2(-14.6601, -18.0172)
+scale = Vector2(1.26108, 1.26108)
+collision_layer = 2
+collision_mask = 8
+
+[node name="haze_CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hazarddetectord"]
+position = Vector2(13.5, 12)
+shape = SubResource("RectangleShape2D_7tiac")
+
+[node name="Hitbox" parent="Sprite2D" instance=ExtResource("6_khrxx")]
+position = Vector2(-14.6601, -18.0172)
+scale = Vector2(1.26108, 1.26108)
+collision_layer = 32
+collision_mask = 16
+script = null
+
+[node name="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
+position = Vector2(-7.06252, 14)
+disabled = true
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_te500")
+
+[node name="dash_cool" type="Timer" parent="."]
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qdvvq")
+}
+
+[node name="attack_cool" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="attack_yansi" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="walk_timer" type="Timer" parent="."]
+wait_time = 0.001
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_right = 11894
+limit_bottom = 1766
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="dash_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xtlon")
+
+[node name="attack_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dxc6g")
+
+[node name="jump_1_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jf1f5")
+
+[node name="jump_2_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_dk3mb")
+
+[node name="walk_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_d7msg")
+autoplay = true
+
+[connection signal="area_entered" from="Sprite2D/hazarddetectord" to="." method="_on_hazarddetectord_area_entered"]
+[connection signal="timeout" from="dash_cool" to="." method="_on_dash_cool_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="attack_cool" to="." method="_on_attack_cool_timeout"]
+[connection signal="timeout" from="attack_yansi" to="." method="_on_attack_yansi_timeout"]
+[connection signal="timeout" from="walk_timer" to="." method="_on_walk_timer_timeout"]
+
+[editable path="Sprite2D/Hitbox"]

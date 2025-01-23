@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://tsbq2gndb5ic"]
+
+[ext_resource type="PackedScene" uid="uid://bjfbahciyjdtq" path="res://sence/play_test.tscn" id="1_l7de7"]
+
+[node name="Test_Player" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_l7de7")]
+
+[editable path="Player"]
+[editable path="Player/Sprite2D/Hitbox"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://df378ia4ept7g"
+path="res://.godot/imported/脚步 沙砾上行走 四声循环 bpm 120.wav-876818a43177cc554f305e9b2c3cc03d.sample"
+
+[deps]
+
+source_file="res://art/Audio/脚步 沙砾上行走 四声循环 bpm 120.wav"
+dest_files=["res://.godot/imported/脚步 沙砾上行走 四声循环 bpm 120.wav-876818a43177cc554f305e9b2c3cc03d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

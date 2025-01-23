@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://bp4jgjjyku073"]
+
+[ext_resource type="Script" path="res://rigid_body_2d.gd" id="1_554c2"]
+[ext_resource type="Texture2D" uid="uid://dj1wvj7mdcb8y" path="res://art/Enemy/Enemy1_bullet.png" id="2_6vjdh"]
+[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_xdnrx"]
+
+[sub_resource type="Animation" id="Animation_81f6a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xj3e0"]
+resource_name = "fly"
+length = 0.7
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6okhm"]
+_data = {
+"RESET": SubResource("Animation_81f6a"),
+"fly": SubResource("Animation_xj3e0")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3pdv"]
+size = Vector2(8, 9)
+
+[node name="bullet" type="RigidBody2D"]
+position = Vector2(1, 0)
+scale = Vector2(3, 3)
+gravity_scale = 0.0
+script = ExtResource("1_554c2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6okhm")
+}
+
+[node name="Enemy1Bullet" type="Sprite2D" parent="."]
+position = Vector2(6, -4)
+scale = Vector2(1.65625, 1.65625)
+texture = ExtResource("2_6vjdh")
+hframes = 4
+
+[node name="hitbox" type="Area2D" parent="Enemy1Bullet"]
+light_mask = 8
+position = Vector2(-3.62264, 2.41509)
+scale = Vector2(0.603774, 0.603774)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("3_xdnrx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy1Bullet/hitbox"]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_l3pdv")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg8q1tyh418bj"]
+
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_45epk"]
+[ext_resource type="Texture2D" uid="uid://2037qeu4jebp" path="res://UI/MainMenu.jpg" id="2_dw4bi"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_45epk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 744.0
+offset_bottom = 779.0
+texture = ExtResource("2_dw4bi")
+stretch_mode = 5
+
+[node name="Button(Quit)" type="Button" parent="."]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 715.0
+offset_right = 623.0
+offset_bottom = 723.0
+scale = Vector2(10.12, 2.12)
+action_mode = 0
+flat = true
+
+[node name="Button(Game Start)" type="Button" parent="."]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 677.0
+offset_right = 473.0
+offset_bottom = 685.0
+scale = Vector2(29.9867, 2.584)
+toggle_mode = true
+button_pressed = true
+flat = true
+
+[connection signal="pressed" from="Button(Quit)" to="." method="_on_button_quit_pressed"]
+[connection signal="pressed" from="Button(Game Start)" to="." method="_on_button_game_start_pressed"]
