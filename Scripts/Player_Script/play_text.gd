@@ -9,7 +9,6 @@ var is_grounded: bool = false
 var jump_count = 0
 var dashenchurge: bool = false
 const WALL_JUMP_FORCE = Vector2(0, -350)  # 蹬墙跳跃时的力量
-
 var is_wall_sliding = false
 var dash_gravity = Vector2(0, 980)  # 设定该变量为力
 var canattack = true
