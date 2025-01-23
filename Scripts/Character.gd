@@ -2,6 +2,7 @@
 extends Node
 
 class_name Character
+@onready var hurt: AudioStreamPlayer = $"../hurt"
 
 var health: int = 100
 var speed: float = 5.0

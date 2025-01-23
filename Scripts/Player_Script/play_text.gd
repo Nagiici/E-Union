@@ -8,7 +8,8 @@ var dashing = false
 var is_grounded: bool = false
 var jump_count = 0
 var dashenchurge: bool = false
-const WALL_JUMP_FORCE = Vector2(-300, -350)  # 蹬墙跳跃时的力量
+const WALL_JUMP_FORCE = Vector2(0, -350)  # 蹬墙跳跃时的力量
+
 var is_wall_sliding = false
 var dash_gravity = Vector2(0, 980)  # 设定该变量为力
 var canattack = true
@@ -19,7 +20,6 @@ var canattack = true
 func _ready() -> void:
 	add_to_group("Player")
 	$AnimationPlayer.play("idle")
-	$walk_audio.stream_paused = true
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 			$AnimationPlayer.play("jump_1")
 			$jump_1_audio.play()
 		elif not is_grounded and is_wall_sliding == false and (jump_count == 1 or jump_count == 0):
-			velocity.y = JUMP_VELOCITY * 60/100
+			velocity.y = JUMP_VELOCITY * 85/100
 			jump_count = 2
 			$AnimationPlayer.play("jump_2")
 			$jump_2_audio.play()
@@ -113,12 +113,12 @@ func dash():
 		dashenchurge = false
 
 func walk_animation():
-	if velocity.x != 0 and is_on_floor() and SPEED == 175:
+	if velocity.x != 0 and is_on_floor() and SPEED == 125:
 		$AnimationPlayer.play("walk")
-		if not $walk_audio.playing:
-			$walk_audio.stream_paused = false
 		$walk_timer.start()
-	elif velocity.x == 0 or not is_grounded:
+	if $AnimationPlayer.current_animation == 'walk':
+		$walk_audio.stream_paused = false
+	else:
 		$walk_audio.stream_paused = true
 
 func attack():
@@ -134,7 +134,7 @@ func _on_dash_cool_timeout() -> void:
 	canDash = true
 
 func _on_dash_timer_timeout() -> void:
-	SPEED = 175
+	SPEED = 125
 	dash_gravity = Vector2(0, 980)
 	if velocity == Vector2.ZERO:  # 待机动画
 		$AnimationPlayer.play("idle")
@@ -149,8 +149,3 @@ func _on_attack_yansi_timeout() -> void:
 func _on_walk_timer_timeout() -> void:
 	if velocity == Vector2.ZERO:  # 待机动画
 		$AnimationPlayer.play("idle")
-
-func _on_hazarddetectord_area_entered(area: Area2D) -> void:
-	$hurt.play()
-	await $hurt.finished 
-	get_tree().reload_current_scene()
