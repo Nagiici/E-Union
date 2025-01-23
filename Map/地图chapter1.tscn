@@ -4333,7 +4333,7 @@ texture = ExtResource("8_dq6pp")
 centered = false
 
 [node name="Test_Player" parent="TileMap1-3" instance=ExtResource("2_31fac")]
-position = Vector2(-760, 693)
+position = Vector2(8814, 331)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="TileMap1-3/Test_Player" index="0"]

@@ -13,6 +13,7 @@ var shoot_direct = 0
 var timer: Timer
 @onready var raycast: RayCast2D = $Sprite2D/RayCast2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 func _ready():
@@ -39,6 +40,7 @@ func shoot():
 	get_parent().add_child(bullet)
 	await $AnimationPlayer.animation_finished
 	$AnimationPlayer.play("idle")
+	audio_stream_player_2d.play()
 	# 调试输出：检查子弹是否已发射
 	#print("Bullet fired. Position:", bullet.global_position, "Velocity:", bullet.linear_velocity)
 

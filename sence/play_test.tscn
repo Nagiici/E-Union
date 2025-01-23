@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bjfbahciyjdtq"]
+[gd_scene load_steps=21 format=3 uid="uid://bjfbahciyjdtq"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script/play_text.gd" id="1_i0332"]
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_te500"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cnugrbsd25khq" path="res://art/Audio/跳跃.wav" id="7_jf1f5"]
 [ext_resource type="AudioStream" uid="uid://d1myj0m6qcxxk" path="res://art/Audio/二段跳.wav" id="8_dk3mb"]
 [ext_resource type="AudioStream" uid="uid://df378ia4ept7g" path="res://art/Audio/脚步 沙砾上行走 四声循环 bpm 120.wav" id="9_d7msg"]
+[ext_resource type="AudioStream" uid="uid://c47i2i5lxli4i" path="res://art/Audio/被远程武器击中.wav" id="10_al7n3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bof5"]
 size = Vector2(7, 47)
@@ -249,6 +250,9 @@ stream = ExtResource("8_dk3mb")
 [node name="walk_audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_d7msg")
 autoplay = true
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_al7n3")
 
 [connection signal="area_entered" from="Sprite2D/hazarddetectord" to="." method="_on_hazarddetectord_area_entered"]
 [connection signal="timeout" from="dash_cool" to="." method="_on_dash_cool_timeout"]

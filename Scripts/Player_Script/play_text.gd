@@ -151,4 +151,6 @@ func _on_walk_timer_timeout() -> void:
 		$AnimationPlayer.play("idle")
 
 func _on_hazarddetectord_area_entered(area: Area2D) -> void:
+	$hurt.play()
+	await $hurt.finished
 	get_tree().reload_current_scene()

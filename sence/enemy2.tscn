@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b86bows5nbsnn"]
+[gd_scene load_steps=11 format=3 uid="uid://b86bows5nbsnn"]
 
 [ext_resource type="Texture2D" uid="uid://0yeyhiqxsbaw" path="res://art/Enemy/Enemy1.png" id="1_dccab"]
 [ext_resource type="Script" path="res://sence/enemy_2.gd" id="1_ufeit"]
+[ext_resource type="AudioStream" uid="uid://bf720jtnf6eo4" path="res://art/Audio/开火.wav" id="3_u6jjf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_soy44"]
 size = Vector2(47, 38)
@@ -120,6 +121,9 @@ wait_time = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_mjykr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_u6jjf")
 
 [connection signal="area_entered" from="Sprite2D/hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
