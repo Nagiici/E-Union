@@ -249,12 +249,13 @@ stream = ExtResource("8_dk3mb")
 
 [node name="walk_audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_d7msg")
+volume_db = -30.0
 autoplay = true
 
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_al7n3")
 
-[connection signal="area_entered" from="Sprite2D/hazarddetectord" to="." method="_on_hazarddetectord_area_entered"]
+[connection signal="area_entered" from="Sprite2D/hazarddetectord" to="Node" method="_on_hazarddetectord_area_entered"]
 [connection signal="timeout" from="dash_cool" to="." method="_on_dash_cool_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="attack_cool" to="." method="_on_attack_cool_timeout"]
