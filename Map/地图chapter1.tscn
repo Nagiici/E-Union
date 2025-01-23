@@ -4231,10 +4231,10 @@ size = Vector2(10.9966, 507)
 size = Vector2(11, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tt836"]
-size = Vector2(67.5, 20.5)
+size = Vector2(61.75, 14.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prnhv"]
-size = Vector2(183, 20)
+size = Vector2(183, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xbqx"]
 size = Vector2(14.5, 444)
@@ -4261,7 +4261,7 @@ size = Vector2(65, 11)
 size = Vector2(2304.5, 55.3948)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj2dj"]
-size = Vector2(9594.58, 73.8944)
+size = Vector2(9616, 73.8944)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mbhm"]
 size = Vector2(19.5, 469)
@@ -4343,7 +4343,7 @@ position = Vector2(10509, 483)
 metadata/_edit_group_ = true
 
 [node name="Player" parent="TileMap1-3/Test_Player" index="0"]
-position = Vector2(1413, 44)
+position = Vector2(-10394, 160)
 
 [node name="hazarddetectord" parent="TileMap1-3/Test_Player/Player/Sprite2D" index="0"]
 position = Vector2(-1164.77, -25.5837)
@@ -4417,6 +4417,12 @@ position = Vector2(10740, 1108)
 
 [node name="CollisionShape2D" parent="8剩下/Area2D53" index="0"]
 position = Vector2(0.699997, -1.3335)
+
+[node name="Area2D5" parent="8剩下" index="20"]
+position = Vector2(570, 396)
+
+[node name="Area2D4" parent="8剩下" index="54"]
+position = Vector2(421, 632)
 
 [node name="background" parent="8剩下" index="66"]
 volume_db = -50.0
@@ -4564,15 +4570,15 @@ position = Vector2(500, 116)
 shape = SubResource("RectangleShape2D_tt836")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D14"]
-position = Vector2(1110, -11)
+position = Vector2(1107.13, -7.875)
 shape = SubResource("RectangleShape2D_tt836")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D14"]
-position = Vector2(1365, 105)
+position = Vector2(1365, 100)
 shape = SubResource("RectangleShape2D_tt836")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Area2D14"]
-position = Vector2(1237, 81)
+position = Vector2(1236, 87)
 shape = SubResource("RectangleShape2D_tt836")
 
 [node name="Area2D15" type="Area2D" parent="."]
@@ -4581,7 +4587,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D15"]
-position = Vector2(-44.5, 147)
+position = Vector2(-46, 151.5)
 shape = SubResource("RectangleShape2D_prnhv")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D15"]
@@ -4748,7 +4754,7 @@ position = Vector2(2068.65, -78.0922)
 shape = SubResource("RectangleShape2D_r861o")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D5"]
-position = Vector2(-3907.81, -532.737)
+position = Vector2(-3897.1, -532.737)
 shape = SubResource("RectangleShape2D_dj2dj")
 
 [node name="Area2D17" type="Area2D" parent="."]

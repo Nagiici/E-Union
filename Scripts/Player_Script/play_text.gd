@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
-var SPEED = 175
-const JUMP_VELOCITY = -400.0
+var SPEED = 125
+const JUMP_VELOCITY = -250.0
 var dashDirection: Vector2 = Vector2(1, 0)
 var canDash = true
 var dashing = false
 var is_grounded: bool = false
 var jump_count = 0
 var dashenchurge: bool = false
-const WALL_JUMP_FORCE = Vector2(-200, -400)  # 蹬墙跳跃时的力量
+const WALL_JUMP_FORCE = Vector2(-300, -350)  # 蹬墙跳跃时的力量
 var is_wall_sliding = false
 var dash_gravity = Vector2(0, 980)  # 设定该变量为力
 var canattack = true
